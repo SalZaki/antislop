@@ -65,6 +65,41 @@ It preserves meaning (no new claims, no dropped facts) and register: formal stay
 
 If the input is already clean, the skill returns it unchanged.
 
+## Customisation
+
+You can add your own slop words, or exempt words from being flagged, without forking the skill.
+
+**Personal overrides** (survive plugin updates):
+
+```bash
+mkdir -p ~/.claude/config/remove-ai-slop
+```
+
+Then add either or both:
+
+- `~/.claude/config/remove-ai-slop/user-vocabulary.md` — extra words to flag
+- `~/.claude/config/remove-ai-slop/user-allow-list.md` — words to never flag
+
+**Project overrides** (shipped with your repo, shared with your team):
+
+- `.claude/skills/remove-ai-slop/overrides/user-vocabulary.md`
+- `.claude/skills/remove-ai-slop/overrides/user-allow-list.md`
+
+Format spec and examples live in [`skills/remove-ai-slop/overrides/README.md`](./skills/remove-ai-slop/overrides/README.md). Allow-list wins ties, so you can keep a domain-specific term (`robust` for server reliability, `leverage` for finance) without forking anything.
+
+## Repo layout
+
+```
+skills/remove-ai-slop/
+├── SKILL.md                    # Slim guide: principles, decisions, output rules
+├── references/                 # Detailed tells & fix recipes (loaded on demand)
+├── overrides/                  # User/project customisation (stubs + format spec)
+├── examples/                   # Worked before/after rewrites
+└── tests/                      # Hand-runnable fixtures to catch regressions
+```
+
+The skill follows Claude Code's progressive-disclosure pattern: the slim `SKILL.md` is what loads when the skill activates; the bulky reference tables only load when a specific category of tell needs the detail.
+
 ## License
 
 [MIT](./LICENSE)
