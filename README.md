@@ -123,6 +123,12 @@ Rough sketch for future skills in this repo:
 
 The `writing-skills` conventions from Anthropic's superpowers plugin are the reference for skill structure; this repo follows them.
 
+## Contributing
+
+Contributions are welcome — vocabulary additions, bug fixes, new sibling skills, tests, or docs. See [CONTRIBUTING.md](./CONTRIBUTING.md) for the full guide: repo orientation, how to modify or add a skill, how to run the fixtures, commit and PR conventions, and the dogfood rule (apply `remove-ai-slop` to your own prose before opening a PR).
+
+If you're unsure whether something fits, open an issue first.
+
 ## License
 
 [MIT](./LICENSE)
