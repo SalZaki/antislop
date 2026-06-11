@@ -1,0 +1,20 @@
+{
+  "name": "antislop",
+  "version": "0.1.0",
+  "description": "Claude Code skill that removes the tells of AI-generated writing.",
+  "author": {
+    "name": "Sal Zaki",
+    "url": "https://github.com/SalZaki"
+  },
+  "homepage": "https://github.com/SalZaki/antislop",
+  "repository": "https://github.com/SalZaki/antislop",
+  "license": "MIT",
+  "keywords": [
+    "claude-code",
+    "skill",
+    "writing",
+    "editing",
+    "ai-detection",
+    "humanize"
+  ]
+}
