@@ -61,9 +61,7 @@ Want to see what changed? Ask: *"What did you change?"* or *"Show me the diff."*
 
 ## Principles
 
-1. **Preserve meaning.** No new claims, no dropped facts.
-2. **Preserve register.** Formal stays formal (just less floridly so). Casual stays casual.
-3. **Cut, don't rewrite, when you can.** Most slop is padding — deleting beats rephrasing.
+It preserves meaning (no new claims, no dropped facts) and register: formal stays formal, casual stays casual. It cuts rather than rewrites when it can — most slop is padding, and deleting usually beats rephrasing.
 
 If the input is already clean, the skill returns it unchanged.
 
