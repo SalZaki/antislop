@@ -33,7 +33,7 @@ Claude Code discovers the skills on the next session.
 
 ### Project-scoped
 
-Drop the relevant `skills/<skill-name>/` directory into your project's `.claude/skills/`. The skill ships with the project.
+`remove-ai-slop` is self-contained, so you can drop `skills/remove-ai-slop/` into your project's `.claude/skills/` on its own. `detect-ai-slop` and `score-ai-slop` depend on the shared engine at the plugin root (`shared/`), so the suite is not single-skill-copyable: install the whole plugin with `/plugin install` (or clone the repo) to use them.
 
 ## Usage (remove-ai-slop)
 

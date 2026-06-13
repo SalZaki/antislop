@@ -19,7 +19,7 @@ The skill checks three locations in priority order. Later entries override earli
 
 ## File format
 
-Both files are plain markdown. The skill parses the tables and bullets — comments and section headings are fine, they're just ignored.
+Both files are plain markdown. The parser strips HTML comments (`<!-- ... -->`) and their contents before reading the tables and bullets, so commented-out example rows never count as live entries. Section headings are ignored.
 
 ### `user-vocabulary.md`
 
