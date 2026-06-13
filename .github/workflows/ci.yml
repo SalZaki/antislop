@@ -19,3 +19,47 @@ jobs:
         run: |
           python -m pip install --quiet pyyaml
           python scripts/check_frontmatter.py
+
+  # Direction C: report-only slop gate. Scores changed author-facing markdown and
+  # surfaces clusters as a step summary + annotations. NEVER fails the build in v1
+  # (continue-on-error); flip to blocking later by adding --enforce and dropping
+  # continue-on-error, once the noise floor is known.
+  slop-gate:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Detect changed author-facing markdown
+        id: changed
+        env:
+          BASE_REF: ${{ github.base_ref }}
+        run: |
+          git fetch origin "$BASE_REF"
+          # three-dot = changes since merge-base; ACMR drops deletions; scope to
+          # author-facing prose only (skills/ and shared/ are plugin internals that
+          # legitimately contain slop words as data and would self-trip the gate).
+          files=$(git diff --name-only --diff-filter=ACMR "origin/$BASE_REF...HEAD" -- '*.md' '*.mdx' \
+            | grep -E '^(README\.md|CHANGELOG\.md|CONTRIBUTING\.md|docs/.*\.(md|mdx))$' || true)
+          {
+            echo 'files<<EOF'
+            echo "$files"
+            echo EOF
+          } >> "$GITHUB_OUTPUT"
+      - name: Slop gate (report-only)
+        if: steps.changed.outputs.files != ''
+        continue-on-error: true
+        env:
+          FILES: ${{ steps.changed.outputs.files }}
+        run: |
+          printf '%s\n' "$FILES" > /tmp/changed.txt
+          OVR=""
+          [ -f skills/remove-ai-slop/overrides/user-allow-list.md ] && OVR="$OVR --allow-list skills/remove-ai-slop/overrides/user-allow-list.md"
+          [ -f skills/remove-ai-slop/overrides/user-vocabulary.md ] && OVR="$OVR --extra-vocab skills/remove-ai-slop/overrides/user-vocabulary.md"
+          python3 scripts/slop_gate.py --paths-from /tmp/changed.txt --format github $OVR
