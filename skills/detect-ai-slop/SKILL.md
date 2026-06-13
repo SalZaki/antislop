@@ -1,6 +1,6 @@
 ---
 name: detect-ai-slop
-description: Use when the user wants to SEE what AI tells are in a piece of text without rewriting it — "flag the AI slop", "where are the tells", "show me what to fix", "detect AI-generated writing", "check this for slop but don't change it", "what would you flag here", or wants an editorial / pre-publish review that lists issues by location. This is the report lens: it returns located findings (category, severity, the offending text), never a rewrite and never a single 0-10 score. To actually rewrite, use remove-ai-slop.
+description: Use when the user wants to SEE which AI tells are in a piece of text without rewriting it. Triggers include "flag the AI slop", "where are the tells", "show me what to fix", "detect AI-generated writing", "check this for slop but don't change it", "what would you flag here", or any editorial / pre-publish review that lists issues by location. This is the report lens; it returns located findings (category, severity, the offending text), never a rewrite and never a single 0-10 score. To rewrite instead, use remove-ai-slop.
 ---
 
 # Detect AI Slop

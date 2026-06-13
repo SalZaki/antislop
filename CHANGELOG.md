@@ -3,6 +3,15 @@
 All notable changes to this project are documented here. Format follows
 [Keep a Changelog](https://keepachangelog.com/); versions track `.claude-plugin/plugin.json`.
 
+## [0.2.1] - 2026-06-13
+
+### Fixed
+- `detect-ai-slop` `SKILL.md` frontmatter failed to parse ("mapping values are not
+  allowed in this context"): the `description:` value contained an unquoted
+  colon-space (`report lens: it returns`), which YAML read as a nested mapping.
+  Reworded to drop the colon (and an em-dash). The skill now loads. 0.2.0 shipped this
+  break to `main`; 0.2.1 is the hotfix.
+
 ## [0.2.0] - 2026-06-13
 
 The suite grows a second lens and a shared engine. `detect-ai-slop` reports *where*
