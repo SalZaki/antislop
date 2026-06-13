@@ -3,6 +3,15 @@
 All notable changes to this project are documented here. Format follows
 [Keep a Changelog](https://keepachangelog.com/); versions track `.claude-plugin/plugin.json`.
 
+## [0.3.3] - 2026-06-13
+
+### Changed
+- Override docs: clarified that the parser strips HTML comments (`<!-- ... -->`) and
+  their contents before reading tables/bullets, so commented-out example rows never
+  count as live entries.
+- README install: documented that the `detect`/`score` suite needs the whole plugin
+  (shared engine at the plugin root); only `remove-ai-slop` is single-skill-copyable.
+
 ## [0.3.2] - 2026-06-13
 
 ### Added
