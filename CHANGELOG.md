@@ -3,6 +3,14 @@
 All notable changes to this project are documented here. Format follows
 [Keep a Changelog](https://keepachangelog.com/); versions track `.claude-plugin/plugin.json`.
 
+## [0.4.1] - 2026-06-13
+
+### Fixed
+- **Security (CI hardening):** the CI workflow had no explicit `permissions` block, so
+  the `test` job's `GITHUB_TOKEN` inherited the repository default (CodeQL
+  `actions/missing-workflow-permissions`, medium). Added a workflow-level
+  `permissions: contents: read` default; neither job writes.
+
 ## [0.4.0] - 2026-06-13
 
 ### Added
