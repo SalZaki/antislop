@@ -3,6 +3,22 @@
 All notable changes to this project are documented here. Format follows
 [Keep a Changelog](https://keepachangelog.com/); versions track `.claude-plugin/plugin.json`.
 
+## [0.3.0] - 2026-06-13
+
+The third lens lands. `score-ai-slop` gives an aggregate quality-pass read over the same
+engine: a per-category breakdown plus a plain-language publish-readiness call.
+
+### Added
+- **`score-ai-slop` skill** — the breakdown lens. Runs the deterministic script for
+  per-category counts, adds judged notes for the meaning-dependent categories, and
+  returns a readiness call (clean / light / heavy). Deliberately no single 0-10 number,
+  because one number invites gaming. Located findings stay in `detect-ai-slop`; rewriting
+  stays in `remove-ai-slop`.
+- A `summarize()` unit test covering the per-category aggregation `score-ai-slop` relies on.
+
+### Changed
+- README skills table: the suite (`remove` / `detect` / `score`) is complete.
+
 ## [0.2.1] - 2026-06-13
 
 ### Fixed

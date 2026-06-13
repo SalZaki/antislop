@@ -7,8 +7,8 @@ A [Claude Code](https://docs.claude.com/en/docs/claude-code/overview) plugin for
 | Skill | Status | What it does |
 |---|---|---|
 | [`remove-ai-slop`](./skills/remove-ai-slop) | ✅ Shipped | Rewrites pasted text to remove specific AI tells while preserving the author's meaning, register, and voice. Surgical, not stylistic. |
-| [`detect-ai-slop`](./skills/detect-ai-slop) | 🚧 In review (PR1) | Reports *where* the AI tells are — located findings by category and severity, no rewrite and no single score. For editorial / pre-publish review. |
-| `score-ai-slop` | 🚧 PR2 | A per-category breakdown framed as a quality pass. No headline number (a number invites gaming). |
+| [`detect-ai-slop`](./skills/detect-ai-slop) | ✅ Shipped | Reports *where* the AI tells are, as located findings by category and severity, no rewrite and no single score. For editorial / pre-publish review. |
+| [`score-ai-slop`](./skills/score-ai-slop) | ✅ Shipped | A per-category breakdown quality pass: deterministic counts plus judged notes and a plain-language readiness call. No headline number (a number invites gaming). |
 
 The suite shares one detection engine: [`shared/spec.md`](./shared/spec.md) holds the
 rules, and [`shared/slop_count.py`](./shared/slop_count.py) is a zero-dependency Python 3
