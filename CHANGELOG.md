@@ -3,6 +3,30 @@
 All notable changes to this project are documented here. Format follows
 [Keep a Changelog](https://keepachangelog.com/); versions track `.claude-plugin/plugin.json`.
 
+## [0.4.0] - 2026-06-13
+
+### Added
+- **Direction C: a report-only CI slop gate.** A `slop-gate` job
+  (`.github/workflows/ci.yml`, `pull_request` only) scores changed author-facing
+  markdown (README, CHANGELOG, CONTRIBUTING, `docs/**`) and surfaces slop clusters as a
+  step summary and inline annotations. It is **advisory in v1** (`continue-on-error`,
+  never fails the build); flipping to a blocking required check is a one-line change
+  later (`--enforce` + drop `continue-on-error`).
+- **`scripts/slop_gate.py`** — zero-dependency gate wrapper. Imports the engine
+  in-process, groups findings per paragraph, and applies a threshold deliberately
+  stricter than the rewrite-lens rule to avoid CI false-positive fatigue: a paragraph
+  breaches on (≥1 med/high tell AND ≥2 tells) OR (≥3 vocabulary tells). Two
+  low-severity vocab words alone never breach. IO/decode errors map to exit 2, never a
+  fake breach. Reuses the override/allow-list mechanism via the scorer.
+- **`shared/test_slop_gate.py`** — 12 tests (gate rule, report-only vs `--enforce` exit
+  codes, allow-list suppression, IO errors). Wired into the existing CI test job.
+
+### Notes
+- Scope is changed files only and excludes plugin internals (`skills/`, `shared/`) by
+  design: those contain slop words as data and would self-trip a gate. Verified: the
+  repo's own README would breach a naive blocking gate today, which is why v1 ships
+  advisory.
+
 ## [0.3.3] - 2026-06-13
 
 ### Changed
