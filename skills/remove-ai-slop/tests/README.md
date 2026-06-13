@@ -1,6 +1,6 @@
 # Tests
 
-Lightweight fixtures for verifying that edits to the skill don't regress core behaviour. Run by hand — no CI, no harness — just paste each input into Claude and diff against the expected output.
+Lightweight fixtures for verifying that edits to the skill don't regress core behaviour. These are the LLM-judged tier: run them by hand, pasting each input into Claude and diffing against the expected output. The deterministic engine has automated unit tests in `shared/` that run in CI; these fixtures stay manual because the rewrite is non-deterministic.
 
 ## How to run
 

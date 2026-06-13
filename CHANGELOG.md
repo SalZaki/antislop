@@ -3,6 +3,18 @@
 All notable changes to this project are documented here. Format follows
 [Keep a Changelog](https://keepachangelog.com/); versions track `.claude-plugin/plugin.json`.
 
+## [0.3.2] - 2026-06-13
+
+### Added
+- **CI** (`.github/workflows/ci.yml`): runs the `shared/` unit tests and a SKILL.md
+  frontmatter validator on every pull request and push to `main`.
+- **`scripts/check_frontmatter.py`**: validates each skill's YAML frontmatter (PyYAML in
+  CI, heuristic fallback locally). Guards against the `0.2.0` colon-space break recurring.
+
+### Changed
+- README and `tests/README.md` now describe two test tiers: the deterministic engine is
+  CI-tested; the LLM-judged fixtures stay hand-run (the rewrite is non-deterministic).
+
 ## [0.3.1] - 2026-06-13
 
 Two engine bugs caught by dogfooding the suite on a real AI-marketing blurb.
