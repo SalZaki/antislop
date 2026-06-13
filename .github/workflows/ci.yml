@@ -5,6 +5,11 @@ on:
   push:
     branches: [main]
 
+# Default the GITHUB_TOKEN to read-only for all jobs (CodeQL actions/missing-workflow-permissions).
+# Jobs override per-job only if they need more; neither job here writes.
+permissions:
+  contents: read
+
 jobs:
   test:
     runs-on: ubuntu-latest
