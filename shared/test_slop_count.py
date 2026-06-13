@@ -55,6 +55,24 @@ class TestVocab(unittest.TestCase):
         f = sc.scan("clean line\n\n```\ndelve delve\n```", TERMS)
         self.assertEqual(cats(f), [])
 
+    def test_no_double_count_on_overlapping_phrase(self):
+        # "navigate the complexities of" must not ALSO fire bare "navigate"
+        f = [x for x in sc.scan("we navigate the complexities of compliance", TERMS)
+             if x["category"] == "overused-vocabulary"]
+        self.assertEqual(len(f), 1)
+        self.assertEqual(f[0]["rule_id"], "vocab:navigate-the-complexities-of")
+
+    def test_quoted_text_is_clean_term(self):
+        # "delve here" (no "into") so only the bare term matches
+        f = [x for x in sc.scan("we delve here", TERMS)
+             if x["rule_id"] == "vocab:delve"]
+        self.assertEqual(f[0]["quoted_text"], "delve")  # no trailing truncation
+
+    def test_longer_phrase_wins_over_bare_term(self):
+        f = [x for x in sc.scan("let us delve into the topic", TERMS)
+             if x["category"] == "overused-vocabulary"]
+        self.assertEqual([x["rule_id"] for x in f], ["vocab:delve-into"])
+
 
 class TestAllowList(unittest.TestCase):
     def test_allow_list_suppresses_robust(self):
