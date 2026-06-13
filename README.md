@@ -7,10 +7,13 @@ A [Claude Code](https://docs.claude.com/en/docs/claude-code/overview) plugin for
 | Skill | Status | What it does |
 |---|---|---|
 | [`remove-ai-slop`](./skills/remove-ai-slop) | ✅ Shipped | Rewrites pasted text to remove specific AI tells while preserving the author's meaning, register, and voice. Surgical, not stylistic. |
-| `score-ai-slop` | 🚧 Planned | Returns a slop score (0–10) plus a category breakdown without rewriting. For "check before publishing" use. |
-| `detect-ai-slop` | 🚧 Planned | Flags positions of AI tells without rewriting. Suited for editorial review and CI gates. |
+| [`detect-ai-slop`](./skills/detect-ai-slop) | 🚧 In review (PR1) | Reports *where* the AI tells are — located findings by category and severity, no rewrite and no single score. For editorial / pre-publish review. |
+| `score-ai-slop` | 🚧 PR2 | A per-category breakdown framed as a quality pass. No headline number (a number invites gaming). |
 
-Adding a new skill is just a new directory under `skills/`. The plugin manifest discovers them automatically.
+The suite shares one detection engine: [`shared/spec.md`](./shared/spec.md) holds the
+rules, and [`shared/slop_count.py`](./shared/slop_count.py) is a zero-dependency Python 3
+script that counts the deterministic tells (the LLM judges the meaning-dependent ones).
+Because the skills share that engine, the suite ships together via `/plugin install`.
 
 ## Install
 
