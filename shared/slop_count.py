@@ -176,12 +176,23 @@ def scan(text: str, terms: list[str]) -> list[dict]:
     paragraphs = split_paragraphs(text)
     for idx, para in enumerate(paragraphs):
         low = para.lower()
-        # overused vocabulary
+        # overused vocabulary. Collect matches, then drop any span fully contained
+        # in a longer match so "navigate the complexities of" does not ALSO fire the
+        # bare "navigate" (the vocab table splits "/"-variants into both terms).
+        vmatches = []  # (start, end, term)
         for term in terms:
             for m in re.finditer(r"(?<!\w)" + re.escape(term) + r"(?!\w)", low):
-                findings.append(_finding("vocab:" + term.replace(" ", "-"),
-                                         "overused-vocabulary", idx,
-                                         para[m.start():m.end() + 20]))
+                vmatches.append((m.start(), m.end(), term))
+        vmatches.sort(key=lambda t: (t[0], -(t[1] - t[0])))  # earliest, longest first
+        kept = []  # (start, end)
+        for s, e, term in vmatches:
+            if any(s >= ks and e <= ke for ks, ke in kept):
+                continue
+            kept.append((s, e))
+            # quoted_text is the exact matched term in original case — clean, no
+            # mid-word truncation.
+            findings.append(_finding("vocab:" + term.replace(" ", "-"),
+                                     "overused-vocabulary", idx, para[s:e]))
         # formulaic constructions
         for rule_id, rx in TEMPLATE_RULES:
             for m in rx.finditer(para):

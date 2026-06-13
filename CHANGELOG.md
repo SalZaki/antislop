@@ -3,6 +3,24 @@
 All notable changes to this project are documented here. Format follows
 [Keep a Changelog](https://keepachangelog.com/); versions track `.claude-plugin/plugin.json`.
 
+## [0.3.1] - 2026-06-13
+
+Two engine bugs caught by dogfooding the suite on a real AI-marketing blurb.
+
+### Fixed
+- **Double-count:** a longer vocabulary phrase and its bare sub-term both fired on the
+  same span (e.g. `navigate the complexities of` also flagged `navigate`), because the
+  vocab table splits `/`-variants into separate terms. The longer match now suppresses
+  any sub-term contained within its span.
+- **Span quality:** a finding's `quoted_text` grabbed 20 trailing characters and
+  truncated mid-word (e.g. `"fosteri"`). It is now the exact matched term.
+- Added regression tests for both (no-double-count, longest-phrase-wins, clean
+  `quoted_text`). Suite is 24 tests.
+
+### Known
+- Inflections not listed in the vocab table (e.g. `empowers` when the table has
+  `empower`/`empowering`) are left to the LLM judged tier; a table pass is deferred.
+
 ## [0.3.0] - 2026-06-13
 
 The third lens lands. `score-ai-slop` gives an aggregate quality-pass read over the same
