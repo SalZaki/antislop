@@ -46,4 +46,4 @@ Words that have become statistical signatures of LLM output. Their presence isn'
 
 This is not a banned-words list. Use these words when they're the right word.
 
-**Threshold for forced action:** if 3+ words from this table appear in the same paragraph, rewrite that paragraph — even if individually each use looks defensible.
+**Threshold for forced action (unified rule, see `../../../shared/spec.md`):** rewrite a paragraph when 3+ words from this table appear in it, OR when 2+ tells of any category co-occur in it — even if individually each use looks defensible.

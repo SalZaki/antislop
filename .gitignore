@@ -3,3 +3,7 @@
 .vscode/
 *.log
 node_modules/
+__pycache__/
+*.pyc
+.context/
+TODOS.md

@@ -15,7 +15,7 @@ Rewrite text so it no longer reads as machine-generated, while preserving the au
 
 ## When to act, when to leave alone
 
-Act when **two or more tells co-occur in the same paragraph** — that's the threshold for forced rewrite even if individually each one looks defensible. Single isolated tells are usually fine.
+Act when, in the same paragraph, **two or more tells of any category co-occur OR three or more vocabulary-table words appear** — that's the threshold for forced rewrite even if individually each one looks defensible. Single isolated tells are usually fine. (This is the unified rule in [`../../shared/spec.md`](../../shared/spec.md).)
 
 Don't act on:
 - A single em-dash in a paragraph
