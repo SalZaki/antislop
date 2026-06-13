@@ -3,6 +3,16 @@
 All notable changes to this project are documented here. Format follows
 [Keep a Changelog](https://keepachangelog.com/); versions track `.claude-plugin/plugin.json`.
 
+## [0.4.2] - 2026-06-13
+
+### Changed
+- README rewritten to match the shipped state: all three lenses, a "How it works"
+  section (deterministic vs judged tiers + the shared spec), a CI section (tests +
+  frontmatter validation + the report-only slop gate), and a current project-structure
+  tree (`shared/`, `scripts/`, `.github/workflows/`, the new skills). Dogfooded: the new
+  README passes the repo's own slop gate cleanly (the vocabulary cluster the gate
+  previously flagged in the README is gone).
+
 ## [0.4.1] - 2026-06-13
 
 ### Fixed
