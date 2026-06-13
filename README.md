@@ -110,7 +110,7 @@ A few choices worth pointing out, since they affect day-to-day cost and editabil
 
 **Allow-list beats hard rules.** Domain-specific terms (`robust` for servers, `leverage` for finance, `crucial` in editorial style) can be exempted per-user or per-project. The skill stays opinionated by default but gets out of your way when you know the word is right.
 
-**Hand-runnable tests.** `tests/fixtures/` holds input/expected pairs you can paste into a Claude session by hand and diff. No harness, no CI required — but enough structure to catch regressions when editing the skill or adding a new one.
+**Two test tiers.** The deterministic engine (`shared/`) has stdlib unit tests plus a SKILL.md frontmatter validator, both run in CI on every PR (`.github/workflows/ci.yml`). The LLM-judged fixtures in `tests/fixtures/` stay hand-runnable, since the rewrite is non-deterministic: paste each input into a Claude session and diff against the expected output.
 
 **Room to grow.** Each new skill is a sibling directory under `skills/`. Shared assets (override locations, format conventions) are already named in a skill-scoped way (`~/.claude/config/<skill>/`), so adding `score-ai-slop` doesn't require renaming anything.
 
