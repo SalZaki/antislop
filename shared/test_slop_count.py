@@ -146,5 +146,22 @@ class TestDeterminism(unittest.TestCase):
         self.assertIn("overused-vocabulary", out["summary"])
 
 
+class TestSummary(unittest.TestCase):
+    def test_summary_aggregates_counts_by_category(self):
+        text = ("Let us delve into the robust tapestry. In conclusion, "
+                "it's not just X, it's Y.")
+        findings = sc.scan(text, TERMS)
+        summary = sc.summarize(findings)
+        for cat in summary:
+            self.assertEqual(
+                summary[cat],
+                sum(f["count"] for f in findings if f["category"] == cat))
+        self.assertIn("overused-vocabulary", summary)
+        self.assertIn("scaffolding-and-recap", summary)
+
+    def test_summary_empty_for_clean_text(self):
+        self.assertEqual(sc.summarize(sc.scan("A plain, clear sentence.", TERMS)), {})
+
+
 if __name__ == "__main__":
     unittest.main()
